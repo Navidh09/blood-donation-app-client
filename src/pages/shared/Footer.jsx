@@ -18,7 +18,7 @@ const Footer = () => {
             Every Drop Counts, Every Life Matters
           </p>
         </aside>
-        <nav>
+        <nav className="text-white">
           <h6 className="footer-title opacity-100 text-2xl">Important Links</h6>
           <Link to={"/"}>Home</Link>
           <Link>Add Blood Request</Link>
@@ -27,7 +27,7 @@ const Footer = () => {
           <Link>About Us</Link>
           <Link>Contact Us</Link>
         </nav>
-        <nav>
+        <nav className="text-white">
           <h6 className="footer-title opacity-100 text-2xl">About Blood</h6>
           <Link>What is blood?</Link>
           <Link>What is blood donation?</Link>
@@ -37,11 +37,11 @@ const Footer = () => {
           <Link>Different Blood Groups</Link>
         </nav>
       </div>
-      <div className="footer sm:footer-horizontal footer-center bg-gray-700 text-base-content p-4">
+      <div className="footer sm:footer-horizontal footer-center bg-gray-700 text-white p-4">
         <aside>
           <p className="flex md:flex-row flex-col items-center gap-2">
             Copyright © {new Date().getFullYear()} - All right reserved by
-            <span className="text-red-400 text-base font-semibold flex items-center gap-1">
+            <span className="text-red-400 font-semibold flex items-center gap-1">
               {" "}
               VitalDrops{" "}
               <img className="w-5" src="../../../public/blood.png" alt="" />

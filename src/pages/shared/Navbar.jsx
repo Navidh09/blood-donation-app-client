@@ -4,13 +4,13 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink className={"hover:scale-110"} to={"/"}>
+        <NavLink className={"hover:scale-110 transition"} to={"/"}>
           Home
         </NavLink>
       </li>
 
       <li>
-        <NavLink className={"hover:scale-110"} to={"/blogs"}>
+        <NavLink className={"hover:scale-110 transition"} to={"/blogs"}>
           Donation Requests
         </NavLink>
       </li>
@@ -25,7 +25,7 @@ const Navbar = () => {
         </>
       )} */}
       <li>
-        <NavLink className={"hover:scale-110"} to={"/featuredBlogs"}>
+        <NavLink className={"hover:scale-110 transition"} to={"/featuredBlogs"}>
           Blogs
         </NavLink>
       </li>
@@ -33,7 +33,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar fixed top-0 z-50 h-20 bg-transparent bg-gradient-to-r from-white via-gray-200 to-red-700 shadow-sm mx-auto">
+    <div className="navbar text-white fixed top-0 z-50 h-20 bg-gradient-to-r from-white via-gray-200 to-red-700 shadow-sm mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div
