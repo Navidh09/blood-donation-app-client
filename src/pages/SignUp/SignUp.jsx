@@ -1,41 +1,78 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { TbFidgetSpinner } from "react-icons/tb";
 import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../api/utils";
+import axios from "axios";
 
 const SignUp = () => {
-  const { loader, registerUser, userProfile, setLoader, setUser } = useAuth();
-
+  const {
+    bloodGroups,
+    loader,
+    registerUser,
+    districts,
+    upazilas,
+    userProfile,
+    setLoader,
+    setUser,
+  } = useAuth();
   const navigate = useNavigate();
+
+  const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+
+  const handleDistrictChange = (e) => {
+    const selectedId = e.target.value;
+    const filtered = upazilas.filter((u) => u.district_id === selectedId);
+    setFilteredUpazilas(filtered);
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const image = e.target.image.files[0];
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm_password = form.confirm_password.value;
+    const bloodGroup = form.bloodGroup.value;
+    const district = form.district.options[form.district.selectedIndex].text;
+    const upazila = form.upazila.value;
+    const image = form.image.files[0];
 
-    const imgURL = await imageUpload(image);
+    if (password !== confirm_password) {
+      return toast.error("Password Mismatch");
+    }
 
-    const details = {
-      displayName: name,
-      photoURL: imgURL,
-    };
+    try {
+      const imgURL = await imageUpload(image);
 
-    registerUser(email, password)
-      .then((res) => {
-        setUser(res.user);
-        userProfile(details).then(() => {
-          setLoader(false);
-          toast.success("Registration Successful");
-          navigate("/");
-        });
-        e.target.reset();
-      })
-      .catch(() => {
-        toast.error("Something Wrong");
-      });
+      const details = {
+        displayName: name,
+        photoURL: imgURL,
+        bloodGroup,
+        district,
+        upazila,
+        status: "active",
+        role: "Donor",
+        email,
+      };
+
+      const res = await registerUser(email, password);
+      setUser(res.user);
+      await userProfile(details.displayName, details.photoURL);
+
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/users/${email}`,
+        details
+      );
+
+      toast.success("Registration Successful");
+      navigate("/");
+      form.reset();
+    } catch (err) {
+      toast.error("Something went wrong");
+      setLoader(false);
+    }
   };
 
   return (
@@ -51,31 +88,33 @@ const SignUp = () => {
         >
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block mb-2 text-sm">
+              <label htmlFor="name" className="block mb-2 text-sm">
                 Name
               </label>
               <input
                 type="text"
                 name="name"
                 id="name"
+                required
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
-                data-temp-mail-org="0"
+                className="w-full px-3 py-2 border rounded-md bg-gray-200 border-gray-300 focus:outline-lime-500"
               />
             </div>
+
             <div>
               <label htmlFor="image" className="block mb-2 text-sm">
-                Select Image:
+                Image
               </label>
               <input
                 required
                 type="file"
-                className="file-input"
+                className="file-input w-full"
                 id="image"
                 name="image"
                 accept="image/*"
               />
             </div>
+
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
                 Email address
@@ -86,24 +125,96 @@ const SignUp = () => {
                 id="email"
                 required
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
-                data-temp-mail-org="0"
+                className="w-full px-3 py-2 border rounded-md bg-gray-200 border-gray-300 focus:outline-lime-500"
               />
             </div>
+
             <div>
-              <div className="flex justify-between">
-                <label htmlFor="password" className="text-sm mb-2">
-                  Password
-                </label>
-              </div>
+              <label htmlFor="bloodGroup" className="block mb-2 text-sm">
+                Blood Group
+              </label>
+              <select
+                name="bloodGroup"
+                className="select select-bordered w-full"
+                required
+              >
+                <option disabled selected>
+                  Select Blood Group
+                </option>
+                {bloodGroups.map((group, idx) => (
+                  <option key={idx} value={group}>
+                    {group}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="district" className="block mb-2 text-sm">
+                District
+              </label>
+              <select
+                name="district"
+                className="select select-bordered w-full"
+                required
+                onChange={handleDistrictChange}
+              >
+                <option disabled={true} selected value="">
+                  Select District
+                </option>
+                {districts.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="upazila" className="block mb-2 text-sm">
+                Upazila
+              </label>
+              <select
+                name="upazila"
+                className="select select-bordered w-full"
+                required
+              >
+                <option disabled selected value="">
+                  Select Upazila
+                </option>
+                {filteredUpazilas.map((u) => (
+                  <option key={u.id} value={u.name}>
+                    {u.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block mb-2 text-sm">
+                Password
+              </label>
               <input
                 type="password"
                 name="password"
-                autoComplete="new-password"
                 id="password"
                 required
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                placeholder="********"
+                className="w-full px-3 py-2 border rounded-md bg-gray-200 border-gray-300 focus:outline-lime-500"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="confirm_password" className="block mb-2 text-sm">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                name="confirm_password"
+                id="confirm_password"
+                required
+                placeholder="********"
+                className="w-full px-3 py-2 border rounded-md bg-gray-200 border-gray-300 focus:outline-lime-500"
               />
             </div>
           </div>
@@ -116,7 +227,7 @@ const SignUp = () => {
               {loader ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
-                "Continue"
+                "Register"
               )}
             </button>
           </div>
@@ -130,7 +241,6 @@ const SignUp = () => {
           >
             Login
           </Link>
-          .
         </p>
       </div>
     </div>
