@@ -36,7 +36,6 @@ const SignUp = () => {
       .catch(() => {
         toast.error("Something Wrong");
       });
-    console.log(name, email, password, imgURL);
   };
 
   return (

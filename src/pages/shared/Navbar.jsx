@@ -1,8 +1,10 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const { user, loader } = useAuth();
+  const { user, logOutUser } = useAuth();
+  const navigate = useNavigate();
   const links = (
     <>
       <li>
@@ -33,6 +35,17 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const handleSignOut = () => {
+    logOutUser()
+      .then(() => {
+        toast.success("logged out");
+        navigate("/login");
+      })
+      .catch(() => {
+        toast.error("something error");
+      });
+  };
 
   return (
     <div className="navbar text-white fixed top-0 z-50 h-20 bg-gradient-to-r from-white via-gray-200 to-red-700 shadow-sm mx-auto">
@@ -106,7 +119,7 @@ const Navbar = () => {
               <a>Dashboard</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={handleSignOut}>Logout</a>
             </li>
           </ul>
         </div>
