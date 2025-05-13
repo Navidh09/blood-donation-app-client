@@ -1,6 +1,6 @@
-import Banner from "../../components/Banner";
-import ContactUs from "../../components/ContactUs";
-import Featured from "../../components/Featured";
+import Banner from "../../components/Home/Banner";
+import ContactUs from "../../components/Home/ContactUs";
+import Featured from "../../components/Home/Featured";
 
 const Home = () => {
   return (

@@ -1,6 +1,8 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, loader } = useAuth();
   const links = (
     <>
       <li>
@@ -69,7 +71,7 @@ const Navbar = () => {
             src="../../../public/blood.png"
             alt="vitaldrops logo"
           />
-          VitalDrops
+          Vital Drops
         </a>
       </div>
 
@@ -78,31 +80,43 @@ const Navbar = () => {
       </div>
 
       {/* avatar part */}
-      <div className="dropdown order-2 lg:order-none dropdown-left dropdown-bottom ml-auto mr-4 lg:mr-10 lg:ml-8">
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar"
-        >
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
+      {user ? (
+        <div className="dropdown order-2 lg:order-none dropdown-left dropdown-bottom ml-auto mr-4 lg:mr-10 lg:ml-8">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              {user?.photoURL ? (
+                <img alt="profile photo" src={user.photoURL} />
+              ) : (
+                <img
+                  alt="avatar"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                />
+              )}
+            </div>
           </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 bg-gradient-to-r to-white from-red-700 rounded-box font-semibold z-10 mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <a>Dashboard</a>
+            </li>
+            <li>
+              <a>Logout</a>
+            </li>
+          </ul>
         </div>
-        <ul
-          tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 bg-gradient-to-r to-white from-red-700 rounded-box font-semibold z-10 mt-3 w-52 p-2 shadow"
-        >
-          <li>
-            <a>Dashboard</a>
-          </li>
-          <li>
-            <a>Logout</a>
-          </li>
-        </ul>
-      </div>
+      ) : (
+        <>
+          <Link to={"/login"} className="btn btn-primary">
+            Login
+          </Link>
+        </>
+      )}
     </div>
   );
 };

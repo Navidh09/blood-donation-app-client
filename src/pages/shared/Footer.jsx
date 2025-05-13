@@ -12,7 +12,7 @@ const Footer = () => {
           />
           <p className="text-[#E0E0E0]">
             <span className="text-2xl text-white font-extrabold">
-              VitalDrops
+              Vital Drops
             </span>
             <br />
             Every Drop Counts, Every Life Matters
@@ -43,7 +43,7 @@ const Footer = () => {
             Copyright © {new Date().getFullYear()} - All right reserved by
             <span className="text-red-400 font-semibold flex items-center gap-1">
               {" "}
-              VitalDrops{" "}
+              Vital Drops{" "}
               <img className="w-5" src="../../../public/blood.png" alt="" />
             </span>
           </p>

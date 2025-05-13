@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import bannerImg from "../assets/banner_image.jpg";
+import bannerImg from "../../assets/banner_image.jpg";
 
 const Banner = () => {
   return (
@@ -10,7 +10,10 @@ const Banner = () => {
       <Link className="text-xl btn bg-red-500 border-none text-white w-full p-6 max-w-xs lg:w-auto">
         Join as a Donor
       </Link>
-      <Link className="text-xl btn border border-red-500 bg-white text-red-500 p-6 w-full max-w-xs lg:w-auto">
+      <Link
+        to={"/searchDonor"}
+        className="text-xl btn border border-red-500 bg-white text-red-500 p-6 w-full max-w-xs lg:w-auto"
+      >
         Search Donors
       </Link>
     </div>
