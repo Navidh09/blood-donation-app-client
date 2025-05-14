@@ -10,6 +10,9 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import HomePage from "../components/Dashboard/HomePage";
 import Blogs from "../pages/blogs/Blogs";
 import BlogDetails from "../pages/blogs/BlogDetails";
+import RequestDetails from "../pages/RequestDetails";
+import PendingRequests from "../pages/PendingRequests";
+import CreateDonationRequest from "../pages/CreateDonationRequest";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +33,24 @@ const router = createBrowserRouter([
         element: <Blogs></Blogs>,
       },
       {
+        path: "/donation-requests",
+        element: <PendingRequests></PendingRequests>,
+      },
+      {
+        path: "/create-donation-request",
+        element: <CreateDonationRequest></CreateDonationRequest>,
+      },
+      {
         path: "/blogs/:id",
         element: <BlogDetails></BlogDetails>,
+      },
+      {
+        path: "/donation-requests/:id",
+        element: (
+          <PrivateRoute>
+            <RequestDetails></RequestDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },

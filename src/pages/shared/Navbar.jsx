@@ -14,7 +14,10 @@ const Navbar = () => {
       </li>
 
       <li>
-        <NavLink className={"hover:scale-110 transition"} to={"/blogs"}>
+        <NavLink
+          className={"hover:scale-110 transition"}
+          to={"/donation-requests"}
+        >
           Donation Requests
         </NavLink>
       </li>
@@ -78,14 +81,17 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-red-500 font-extrabold text-2xl">
+        <Link
+          to={"/"}
+          className="btn btn-ghost text-red-500 font-extrabold text-2xl"
+        >
           <img
             className="w-10"
             src="../../../public/blood.png"
             alt="vitaldrops logo"
           />
           Vital Drops
-        </a>
+        </Link>
       </div>
 
       <div className="navbar-end hidden lg:flex font-semibold">
