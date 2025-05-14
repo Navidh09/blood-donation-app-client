@@ -61,10 +61,7 @@ const SignUp = () => {
       setUser(res.user);
       await userProfile(details.displayName, details.photoURL);
 
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/users/${email}`,
-        details
-      );
+      await axios.post(`${import.meta.env.VITE_API_URL}/users`, details);
 
       toast.success("Registration Successful");
       navigate("/");

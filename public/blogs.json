@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "title": "The Importance of Blood Donation",
+    "image": "https://via.placeholder.com/600x300?text=Blood+Donation+1",
+    "excerpt": "Blood donation is a noble act that can save lives in emergencies.",
+    "content": "Blood donation is one of the most generous and impactful ways to help people in need. One pint of blood can save up to three lives...",
+    "published": true
+  },
+  {
+    "id": "2",
+    "title": "Who Can Donate Blood?",
+    "image": "https://via.placeholder.com/600x300?text=Eligibility",
+    "excerpt": "Understand the criteria and conditions to become a blood donor.",
+    "content": "To donate blood, you must be healthy, at least 18 years old, and weigh more than 50kg. People with certain medical conditions are advised not to donate...",
+    "published": true
+  },
+  {
+    "id": "3",
+    "title": "My First Blood Donation Experience",
+    "image": "https://via.placeholder.com/600x300?text=Donor+Story",
+    "excerpt": "A personal story about overcoming fear and saving lives.",
+    "content": "I was nervous before my first donation, but the friendly staff and smooth process made it a memorable experience...",
+    "published": true
+  },
+  {
+    "id": "4",
+    "title": "Facts You Didn't Know About Blood",
+    "image": "https://via.placeholder.com/600x300?text=Blood+Facts",
+    "excerpt": "Learn some surprising facts about the blood running in your veins.",
+    "content": "Did you know your blood travels about 12,000 miles every day? Or that there are more than 30 recognized blood group systems?...",
+    "published": true
+  },
+  {
+    "id": "5",
+    "title": "Top 5 Myths About Blood Donation",
+    "image": "https://via.placeholder.com/600x300?text=Myths",
+    "excerpt": "Let's bust the common misconceptions about donating blood.",
+    "content": "Many believe donating blood leads to weakness or infection. These are myths — blood donation is safe and beneficial for the donor too...",
+    "published": true
+  },
+  {
+    "id": "6",
+    "title": "Benefits of Being a Regular Donor",
+    "image": "https://via.placeholder.com/600x300?text=Benefits",
+    "excerpt": "Donating blood regularly has health and emotional benefits.",
+    "content": "Regular donors often have reduced risks of heart disease and improved mental well-being due to the joy of helping others...",
+    "published": true
+  },
+  {
+    "id": "7",
+    "title": "World Blood Donor Day: Why It Matters",
+    "image": "https://via.placeholder.com/600x300?text=WBDD",
+    "excerpt": "Celebrate and recognize those who save lives every year.",
+    "content": "June 14 is World Blood Donor Day. It’s a time to thank donors, raise awareness, and encourage more people to donate...",
+    "published": true
+  },
+  {
+    "id": "8",
+    "title": "Blood Donation Camps: What to Expect",
+    "image": "https://via.placeholder.com/600x300?text=Camps",
+    "excerpt": "Going to your first donation camp? Here's what to expect.",
+    "content": "From registration to refreshments, here’s a guide to what typically happens during a blood donation camp...",
+    "published": true
+  },
+  {
+    "id": "9",
+    "title": "How Donated Blood is Used",
+    "image": "https://via.placeholder.com/600x300?text=Usage",
+    "excerpt": "Ever wonder where your donated blood goes?",
+    "content": "Donated blood is separated into components and used for trauma patients, surgeries, anemia treatments, and more...",
+    "published": true
+  },
+  {
+    "id": "10",
+    "title": "Emergency Blood Requests: How You Can Help",
+    "image": "https://via.placeholder.com/600x300?text=Emergency",
+    "excerpt": "Be prepared to help in urgent situations requiring blood.",
+    "content": "Emergency requests for rare blood types are common. Staying registered and responsive can make a life-saving difference...",
+    "published": true
+  }
+]

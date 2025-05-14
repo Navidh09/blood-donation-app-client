@@ -29,7 +29,7 @@ const Navbar = () => {
         </>
       )} */}
       <li>
-        <NavLink className={"hover:scale-110 transition"} to={"/featuredBlogs"}>
+        <NavLink className={"hover:scale-110 transition"} to={"/blogs"}>
           Blogs
         </NavLink>
       </li>
@@ -116,7 +116,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 bg-gradient-to-r to-white from-red-700 rounded-box font-semibold z-10 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Dashboard</a>
+              <Link to={"/dashboard"}>Dashboard</Link>
             </li>
             <li>
               <a onClick={handleSignOut}>Logout</a>
