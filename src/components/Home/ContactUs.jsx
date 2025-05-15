@@ -1,4 +1,12 @@
+import { toast } from "react-toastify";
+
 const ContactUs = () => {
+  const handleMessage = (e) => {
+    e.preventDefault();
+    toast.success("Message Sent Successful");
+    e.target.reset();
+  };
+
   return (
     <div className="bg-gray-100 py-16 px-4 lg:px-20">
       <h2 className="text-3xl font-bold text-center mb-10 text-red-600">
@@ -7,7 +15,7 @@ const ContactUs = () => {
 
       <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 bg-white p-8 rounded-2xl shadow">
         {/* Form */}
-        <form className="space-y-6">
+        <form onSubmit={handleMessage} className="space-y-6">
           <div>
             <label className="block mb-2 text-sm font-medium">Name</label>
             <input

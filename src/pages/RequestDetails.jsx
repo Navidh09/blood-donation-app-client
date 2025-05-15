@@ -49,7 +49,7 @@ const RequestDetails = () => {
         <strong>Recipient:</strong> {request.recipientName}
       </p>
       <p>
-        <strong>Location:</strong> {request.location}
+        <strong>Location:</strong> {request.upazila}, {request.district}
       </p>
       <p>
         <strong>Blood Group:</strong> {request.bloodGroup}

@@ -5,30 +5,55 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const CreateDonationRequest = () => {
-  const { bloodGroups } = useAuth();
+  const { bloodGroups, districts, upazilas, user } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     recipientName: "",
     bloodGroup: "",
-    location: "",
+    district: "",
+    upazila: "",
     date: "",
     time: "",
     notes: "",
   });
 
-  const handleChange = (e) => {
+  const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+
+  const handleDistrictChange = (e) => {
+    const selectedId = e.target.value;
+    const filtered = upazilas.filter((u) => u.district_id === selectedId);
+
+    setFilteredUpazilas(filtered);
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      district: selectedId,
+      upazila: "",
+      email: user?.email,
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const selectedDistrict = districts.find((d) => d.id === formData.district);
+    const selectedUpazila = upazilas.find(
+      (u) => u.district_id === formData.district && u.name === formData.upazila
+    );
+
     const newRequest = {
       ...formData,
+      district: selectedDistrict?.name,
+      upazila: selectedUpazila?.name,
+      createdAt: new Date().toISOString(),
       status: "pending",
     };
 
@@ -45,7 +70,7 @@ const CreateDonationRequest = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10 ">
+    <div className="max-w-3xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold text-center text-red-600 mb-8">
         Create Donation Request
       </h2>
@@ -60,6 +85,7 @@ const CreateDonationRequest = () => {
           required
           placeholder="Recipient Name"
           className="input input-bordered w-full"
+          value={formData.recipientName}
           onChange={handleChange}
         />
 
@@ -67,9 +93,10 @@ const CreateDonationRequest = () => {
           name="bloodGroup"
           required
           className="select select-bordered w-full"
+          value={formData.bloodGroup}
           onChange={handleChange}
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             Select Blood Group
           </option>
           {bloodGroups.map((bg, idx) => (
@@ -79,20 +106,47 @@ const CreateDonationRequest = () => {
           ))}
         </select>
 
-        <input
-          type="text"
-          name="location"
+        <select
+          name="district"
+          className="select select-bordered w-full"
           required
-          placeholder="Location"
-          className="input input-bordered w-full"
+          value={formData.district}
+          onChange={handleDistrictChange}
+        >
+          <option value="" disabled>
+            Select District
+          </option>
+          {districts.map((d) => (
+            <option key={d.id} value={d.id}>
+              {d.name}
+            </option>
+          ))}
+        </select>
+
+        <select
+          name="upazila"
+          className="select select-bordered w-full"
+          required
+          value={formData.upazila}
           onChange={handleChange}
-        />
+          disabled={!formData.district}
+        >
+          <option value="" disabled>
+            Select Upazila
+          </option>
+          {filteredUpazilas.map((u) => (
+            <option key={u.id} value={u.name}>
+              {u.name}
+            </option>
+          ))}
+        </select>
 
         <input
           type="date"
           name="date"
           required
           className="input input-bordered w-full"
+          value={formData.date}
           onChange={handleChange}
         />
 
@@ -101,6 +155,7 @@ const CreateDonationRequest = () => {
           name="time"
           required
           className="input input-bordered w-full"
+          value={formData.time}
           onChange={handleChange}
         />
 
@@ -108,6 +163,7 @@ const CreateDonationRequest = () => {
           name="notes"
           placeholder="Additional Notes (optional)"
           className="textarea textarea-bordered w-full"
+          value={formData.notes}
           onChange={handleChange}
         />
 

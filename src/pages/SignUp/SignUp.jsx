@@ -73,7 +73,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center mt-20 bg-gradient-to-t from-10% to-red-500 min-h-screen">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
@@ -219,7 +219,7 @@ const SignUp = () => {
           <div>
             <button
               type="submit"
-              className="bg-lime-500 w-full btn rounded-md py-3 text-white"
+              className="bg-red-500 w-full btn rounded-md py-3 text-white"
             >
               {loader ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
@@ -230,11 +230,11 @@ const SignUp = () => {
           </div>
         </form>
 
-        <p className="px-6 py-4 text-sm text-center text-gray-400">
+        <p className="px-6 py-4 text-sm text-center text-red-500">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="hover:underline hover:text-lime-500 text-gray-600"
+            className="hover:underline hover:text-red-500 text-gray-600"
           >
             Login
           </Link>

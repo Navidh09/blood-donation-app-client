@@ -41,7 +41,7 @@ const PendingRequests = () => {
               >
                 <h3 className="text-xl font-bold mb-2">{req.recipientName}</h3>
                 <p>
-                  <strong>Location:</strong> {req.location}
+                  <strong>Location:</strong> {req.upazila}, {req.district}
                 </p>
                 <p>
                   <strong>Blood Group:</strong> {req.bloodGroup}
