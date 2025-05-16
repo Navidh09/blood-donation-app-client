@@ -16,6 +16,7 @@ import CreateDonationRequest from "../pages/CreateDonationRequest";
 import Profile from "../components/Dashboard/Profile";
 import Homepage from "../components/Dashboard/Common/Homepage";
 import EditDonationRequest from "../components/Dashboard/Donor/EditDonationRequest";
+import MyDonationRequests from "../pages/MyDonationRequests";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <EditDonationRequest></EditDonationRequest>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-donation-requests",
+        element: (
+          <PrivateRoute>
+            <MyDonationRequests></MyDonationRequests>
           </PrivateRoute>
         ),
       },
