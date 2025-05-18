@@ -1,12 +1,14 @@
-# React + Vite
+Website Name: Vital Drops - Every Drop Counts, Every Life Matters
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Website: https://blood-donation-app-395e3.web.app/
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    1. User Authentication
+    2. Image Upload via imageBB
+    3. Find donors quickly using filters for blood group, district, and upazila
+    4. Upazila options change automatically based on selected district.
+    5. Every registered user is assigned the "donor" role automatically.
+    6. Donors can create, edit, view, and delete their donation requests.
+    7. Responsive Dashboard Layout
+    8. Conditional navbar items (blog, funding, dashboard) shown based on login status.

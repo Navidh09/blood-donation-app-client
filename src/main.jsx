@@ -13,6 +13,6 @@ createRoot(document.getElementById("root")).render(
         <RouterProvider router={router}></RouterProvider>
       </div>
     </AuthProvider>
-    <ToastContainer autoClose={2000}></ToastContainer>
+    <ToastContainer autoClose={1500}></ToastContainer>
   </StrictMode>
 );

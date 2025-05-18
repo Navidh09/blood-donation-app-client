@@ -5,11 +5,7 @@ const Footer = () => {
     <footer className="pt-10">
       <div className="footer sm:footer-horizontal bg-red-500 text-base-content p-10">
         <aside>
-          <img
-            className="w-16"
-            src="../../../public/blood.jpg"
-            alt="vital drops logo"
-          />
+          <img className="w-16" src="/blood.jpg" alt="vital drops logo" />
           <p className="text-[#E0E0E0]">
             <span className="text-2xl text-white font-extrabold">
               Vital Drops

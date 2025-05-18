@@ -57,7 +57,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost bg-black lg:hidden"
+            className="btn btn-ghost bg-red-500 lg:hidden"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,18 +85,16 @@ const Navbar = () => {
           to={"/"}
           className="btn btn-ghost text-red-500 font-extrabold text-2xl"
         >
-          <img
-            className="w-10"
-            src="../../../public/blood.png"
-            alt="vitaldrops logo"
-          />
+          <img className="w-10" src="/blood.png" alt="vitaldrops logo" />
           Vital Drops
         </Link>
       </div>
 
-      <div className="navbar-end hidden lg:flex font-semibold">
-        <ul className="menu menu-horizontal text-xl px-1 ">{links}</ul>
-      </div>
+      {user && (
+        <div className="navbar-end hidden lg:flex font-semibold">
+          <ul className="menu menu-horizontal text-xl px-1 ">{links}</ul>
+        </div>
+      )}
 
       {/* avatar part */}
       {user ? (
@@ -130,11 +128,17 @@ const Navbar = () => {
           </ul>
         </div>
       ) : (
-        <>
-          <Link to={"/login"} className="btn btn-primary">
+        <div className="navbar-end mr-1">
+          <div className="hidden md:block">
+            <ul className="menu menu-horizontal text-xl px-1 ">{links}</ul>
+          </div>
+          <Link
+            to={"/login"}
+            className="btn bg-white text-lg text-red-500 btn-sm py-4"
+          >
             Login
           </Link>
-        </>
+        </div>
       )}
     </div>
   );

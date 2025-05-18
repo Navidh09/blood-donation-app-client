@@ -88,7 +88,7 @@ const EditDonationRequest = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow rounded">
-      <h2 className="text-2xl font-bold text-center mb-10 text-red-500 mb-4">
+      <h2 className="text-2xl font-bold text-center mb-10 text-red-500">
         Edit Donation Request
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">

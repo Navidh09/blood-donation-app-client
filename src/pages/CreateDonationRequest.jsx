@@ -1,58 +1,49 @@
-import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const CreateDonationRequest = () => {
   const { bloodGroups, districts, upazilas, user } = useAuth();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    recipientName: "",
-    bloodGroup: "",
-    district: "",
-    upazila: "",
-    date: "",
-    time: "",
-    notes: "",
-  });
-
   const [filteredUpazilas, setFilteredUpazilas] = useState([]);
+  const [selectedDistrictId, setSelectedDistrictId] = useState("");
 
   const handleDistrictChange = (e) => {
-    const selectedId = e.target.value;
-    const filtered = upazilas.filter((u) => u.district_id === selectedId);
-
+    const districtId = e.target.value;
+    const filtered = upazilas.filter((u) => u.district_id === districtId);
     setFilteredUpazilas(filtered);
-    setFormData((prev) => ({
-      ...prev,
-      district: selectedId,
-      upazila: "",
-      email: user?.email,
-    }));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setSelectedDistrictId(districtId);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const selectedDistrict = districts.find((d) => d.id === formData.district);
+    const form = e.target;
+    const recipientName = form.recipientName.value;
+    const bloodGroup = form.bloodGroup.value;
+    const districtId = form.district.value;
+    const upazilaName = form.upazila.value;
+    const date = form.date.value;
+    const time = form.time.value;
+    const notes = form.notes.value;
+
+    const selectedDistrict = districts.find((d) => d.id === districtId);
     const selectedUpazila = upazilas.find(
-      (u) => u.district_id === formData.district && u.name === formData.upazila
+      (u) => u.district_id === districtId && u.name === upazilaName
     );
 
     const newRequest = {
-      ...formData,
+      recipientName,
+      bloodGroup,
       district: selectedDistrict?.name,
       upazila: selectedUpazila?.name,
+      date,
+      time,
+      notes,
+      email: user?.email,
       createdAt: new Date().toISOString(),
       status: "pending",
     };
@@ -64,6 +55,7 @@ const CreateDonationRequest = () => {
       );
       toast.success("Donation request created successfully!");
       navigate("/donation-requests");
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
       toast.error("Something went wrong!");
     }
@@ -85,18 +77,14 @@ const CreateDonationRequest = () => {
           required
           placeholder="Recipient Name"
           className="input input-bordered w-full"
-          value={formData.recipientName}
-          onChange={handleChange}
         />
 
         <select
           name="bloodGroup"
           required
           className="select select-bordered w-full"
-          value={formData.bloodGroup}
-          onChange={handleChange}
         >
-          <option value="" disabled>
+          <option value="" disabled selected>
             Select Blood Group
           </option>
           {bloodGroups.map((bg, idx) => (
@@ -108,12 +96,11 @@ const CreateDonationRequest = () => {
 
         <select
           name="district"
-          className="select select-bordered w-full"
           required
-          value={formData.district}
+          className="select select-bordered w-full"
           onChange={handleDistrictChange}
         >
-          <option value="" disabled>
+          <option value="" disabled selected>
             Select District
           </option>
           {districts.map((d) => (
@@ -125,13 +112,11 @@ const CreateDonationRequest = () => {
 
         <select
           name="upazila"
-          className="select select-bordered w-full"
           required
-          value={formData.upazila}
-          onChange={handleChange}
-          disabled={!formData.district}
+          className="select select-bordered w-full"
+          disabled={!selectedDistrictId}
         >
-          <option value="" disabled>
+          <option value="" disabled selected>
             Select Upazila
           </option>
           {filteredUpazilas.map((u) => (
@@ -146,8 +131,6 @@ const CreateDonationRequest = () => {
           name="date"
           required
           className="input input-bordered w-full"
-          value={formData.date}
-          onChange={handleChange}
         />
 
         <input
@@ -155,16 +138,12 @@ const CreateDonationRequest = () => {
           name="time"
           required
           className="input input-bordered w-full"
-          value={formData.time}
-          onChange={handleChange}
         />
 
         <textarea
           name="notes"
           placeholder="Additional Notes (optional)"
           className="textarea textarea-bordered w-full"
-          value={formData.notes}
-          onChange={handleChange}
         />
 
         <button type="submit" className="btn bg-red-500 text-white w-full">

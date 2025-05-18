@@ -66,6 +66,7 @@ const SignUp = () => {
       toast.success("Registration Successful");
       navigate("/");
       form.reset();
+      // eslint-disable-next-line no-unused-vars
     } catch (err) {
       toast.error("Something went wrong");
       setLoader(false);

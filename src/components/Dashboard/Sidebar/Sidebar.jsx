@@ -2,7 +2,6 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { AiOutlineBars } from "react-icons/ai";
 import { Link, useNavigate } from "react-router";
-import { FcSettings } from "react-icons/fc";
 import { GrLogout } from "react-icons/gr";
 import { toast } from "react-toastify";
 
@@ -23,7 +22,6 @@ const Sidebar = () => {
       });
   };
 
-  // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
@@ -31,18 +29,11 @@ const Sidebar = () => {
     <>
       {/* Small Screen Navbar */}
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
-        <div>
-          <div className="block cursor-pointer p-4 font-bold">
-            <Link to="/">
-              <img
-                // className='hidden md:block'
-                src="https://i.ibb.co/4ZXzmq5/logo.png"
-                alt="logo"
-                width="100"
-                height="100"
-              />
-            </Link>
-          </div>
+        <div className="block cursor-pointer p-4 font-bold">
+          <Link to="/" className="flex items-center text-red-500 gap-2">
+            <img src="/blood.png" alt="logo" width="30" height="30" />
+            <h2>Vital Drops</h2>
+          </Link>
         </div>
 
         <button
@@ -60,20 +51,14 @@ const Sidebar = () => {
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
-          <div>
-            <div className="w-full hidden md:flex px-4 py-2 rounded-lg justify-center items-center mx-auto">
-              <Link
-                to="/"
-                className="btn btn-ghost text-red-500 font-extrabold text-2xl"
-              >
-                <img
-                  className="w-10"
-                  src="../../../public/blood.png"
-                  alt="vitaldrops logo"
-                />
-                Vital Drops
-              </Link>
-            </div>
+          <div className="w-full md:flex  py-2 rounded-lg justify-center items-center mx-auto">
+            <Link
+              to="/"
+              className="btn btn-ghost text-red-500 font-extrabold text-2xl"
+            >
+              <img className="w-10" src="/blood.png" alt="vitaldrops logo" />
+              <h2>Vital Drops</h2>
+            </Link>
           </div>
 
           {/* Nav Items */}
@@ -87,7 +72,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div>
+        <div className="divider">
           <hr />
 
           {/* <MenuItem
